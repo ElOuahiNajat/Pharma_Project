@@ -10,11 +10,6 @@ Pharma est une application web développée avec Spring Boot 3.4.5 permettant la
 - Spring Boot 3.4.5
 - Spring Data JPA
 - Spring Security
-<<<<<<< HEAD
--
-=======
-- 
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 - Spring Web
 - Spring Validation
 - Thymeleaf
@@ -102,11 +97,9 @@ Grâce à Docker et Docker Swarm, l’application Pharma est désormais conteneu
 
 ## Monitoring avec Prometheus et Grafana
 Le système de monitoring a été mis en place avec succès en utilisant Prometheus comme collecteur de métriques et Grafana pour la visualisation.
-<<<<<<< HEAD
-Configuration
-=======
+
+
      Configuration
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 Prometheus est configuré pour scrapper les métriques exposées par l’application Spring Boot via l’endpoint
 Grafana est connecté à Prometheus en tant que source de données.
 La métrique up confirme que l’instance pharma-app est bien surveillée.
@@ -129,7 +122,6 @@ Les compteurs comme http_server_requests_seconds_count sont monotones (toujours 
 
 
 - **Architecture en couches (Layered Architecture)**
-<<<<<<< HEAD
     - Séparation claire entre `controllers`, `services`, `repositories` et `models`.
     - Facilite la maintenance, les tests, et la compréhension du code.
 
@@ -145,7 +137,6 @@ Les compteurs comme http_server_requests_seconds_count sont monotones (toujours 
 
 - **Utilisation de Lombok**
     - Réduction du code répétitif (getters/setters, constructeurs).
-=======
   - Séparation claire entre `controllers`, `services`, `repositories` et `models`.
   - Facilite la maintenance, les tests, et la compréhension du code.
 
@@ -161,14 +152,12 @@ Les compteurs comme http_server_requests_seconds_count sont monotones (toujours 
 
 - **Utilisation de Lombok**
   - Réduction du code répétitif (getters/setters, constructeurs).
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 
 ---
 
 ## Design patterns utilisés
 
 - **Singleton (via @Service)**
-<<<<<<< HEAD
     - Les services Spring sont instanciés une seule fois par le conteneur Spring, ce qui garantit une instance unique.
 
 - **Repository pattern**
@@ -176,7 +165,6 @@ Les compteurs comme http_server_requests_seconds_count sont monotones (toujours 
 
 - **Dependency Injection**
     - Les dépendances sont injectées automatiquement par Spring, ce qui permet un couplage faible et facilite les tests.
-=======
   - Les services Spring sont instanciés une seule fois par le conteneur Spring, ce qui garantit une instance unique.
 
 - **Repository pattern**
@@ -184,14 +172,12 @@ Les compteurs comme http_server_requests_seconds_count sont monotones (toujours 
 
 - **Dependency Injection**
   - Les dépendances sont injectées automatiquement par Spring, ce qui permet un couplage faible et facilite les tests.
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 
 ---
 ## Tests unitaires
 
 Ce projet inclut des tests unitaires pour garantir la fiabilité et la qualité du code métier.
 
-<<<<<<< HEAD
 Les classes testées incluent notamment :
 - `ClientServiceImpl`
 - `FournisseurServiceImpl`
@@ -201,7 +187,6 @@ Ces tests couvrent les principales fonctionnalités de chaque service, comme :
 - La gestion des clients
 - La gestion des fournisseurs
 - Le traitement des ventes
-=======
 Les classes testées incluent notamment :  
 - `ClientServiceImpl`  
 - `FournisseurServiceImpl`  
@@ -211,17 +196,14 @@ Ces tests couvrent les principales fonctionnalités de chaque service, comme :
 - La gestion des clients  
 - La gestion des fournisseurs  
 - Le traitement des ventes  
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 
 Ils sont écrits avec JUnit 5 et Mockito pour simuler les dépendances.
 
 ---
 
-<<<<<<< HEAD
 Pour lancer les tests, utilise la commande Maven suivante :
-=======
+
 Pour lancer les tests, utilise la commande Maven suivante :  
->>>>>>> c2f7b8315a506886a016fc738cb8782c1e186ded
 
 mvn test
 
