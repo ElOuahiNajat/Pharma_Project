@@ -1,10 +1,9 @@
 # Pharma_Project
-# Pharma - Application de gestion des médicaments
+# Pharma - Medication Management Application
 
-Pharma est une application web développée avec Spring Boot 3.4.5 permettant la gestion complète des médicaments, des fournisseurs, des ventes, des utilisateurs, ainsi qu’un tableau de bord statistique. L'application inclut également des fonctionnalités de recherche, d'import/export de données et une interface d'authentification sécurisée.
+Pharma is a web application developed with Spring Boot 3.4.5 allowing complete management of medications, suppliers, sales, users, as well as a statistical dashboard. The application also includes search, import/export features, and a secure authentication interface.
 
-
-## Technologies utilisées
+## Technologies Used
 
 - Java 17
 - Spring Boot 3.4.5
@@ -18,197 +17,163 @@ Pharma est une application web développée avec Spring Boot 3.4.5 permettant la
 - MySQL
 - Maven
 
-## Fonctionnalités
-Authentification
-Enregistrement et connexion des utilisateurs
+## Features
 
-Gestion des rôles (admin, utilisateur)
+Authentication  
+User registration and login
 
-Sécurisation des pages sensibles avec Spring Security
+Role management (admin, user)
 
-Médicaments
-Ajouter, modifier, supprimer, consulter
+Securing sensitive pages with Spring Security
 
-Rechercher par nom, référence, ou catégorie
+Medications  
+Add, edit, delete, view
 
-Suivi de stock et des quantités
+Search by name, reference, or category
 
-Fournisseurs
-Ajouter, modifier, supprimer, consulter
+Stock and quantity tracking
 
-Lier les fournisseurs aux médicaments
+Suppliers  
+Add, edit, delete, view
 
-Recherche par nom ou localisation
+Link suppliers to medications
 
-Ventes
-Enregistrement des ventes de médicaments
+Search by name or location
 
-Calcul automatique du total de chaque vente
+Sales  
+Record medication sales
 
-Mise à jour du stock après vente
+Automatic calculation of total sale amount
 
-Dashboard
-Statistiques globales : ventes mensuelles, stock faible, top produits
+Stock update after sales
 
-Visualisation graphique des données (à intégrer si besoin)
+Dashboard  
+Overall statistics: monthly sales, low stock, top products
 
-Recherche
-Recherche dynamique sur les médicaments, fournisseurs, ventes
+Graphical data visualization (to be integrated if needed)
 
-Import / Export
-Export des données en formats CSV ou Excel
+Search  
+Dynamic search on medications, suppliers, sales
 
-Import de fichiers pour mise à jour en masse
+Import / Export  
+Data export in CSV or Excel formats
 
-## Conteneurisation et Orchestration de l’Application
+File import for bulk updates
 
-Objectif
-Le but de cette section est de présenter le processus de conteneurisation de l’application à l’aide de Docker, ainsi que son déploiement et sa gestion via un orchestrateur de conteneurs, en l’occurrence Docker Swarm. Cette approche permet de garantir la portabilité, la scalabilité et la résilience de l’application Pharma.
+## Application Containerization and Orchestration
 
-Conteneurisation avec Docker
-La conteneurisation consiste à emballer l'application avec toutes ses dépendances dans une image exécutable, appelée conteneur. Cela garantit que l'application s'exécutera de manière cohérente sur tous les environnements.
+### Objective  
+This section presents the process of containerizing the application using Docker, as well as deploying and managing it with a container orchestrator, namely Docker Swarm. This approach ensures portability, scalability, and resilience of the Pharma application.
 
-Un fichier Dockerfile a été créé pour construire l’image de l’application pharma-app.
+### Containerization with Docker  
+Containerization packages the application with all its dependencies into an executable image called a container. This guarantees consistent execution across environments.
 
-Cette image est ensuite utilisée avec Docker Compose pour créer les conteneurs nécessaires à l’application :
+A Dockerfile has been created to build the pharma-app image.
 
-pharma-app : conteneur de l'application web
+This image is then used with Docker Compose to create the necessary containers:
 
-pharma-db : conteneur de la base de données MySQL
+- pharma-app: the web application container  
+- pharma-db: the MySQL database container
 
-Orchestration avec Docker Swarm
-Docker Swarm est un outil d’orchestration de conteneurs natif de Docker. Il permet de gérer efficacement le déploiement, la mise à l’échelle, les mises à jour continues, et la tolérance aux pannes.
+### Orchestration with Docker Swarm  
+Docker Swarm is Docker’s native container orchestration tool. It efficiently manages deployment, scaling, rolling updates, and fault tolerance.
 
-Les étapes suivies :
+Steps followed:
 
-Initialisation du Swarm :
-docker swarm init
+- Initialize Swarm:  
+  `docker swarm init`
 
-Déploiement du stack :
-docker stack deploy -c docker-compose.yml pharma_stack
+- Deploy the stack:  
+  `docker stack deploy -c docker-compose.yml pharma_stack`
 
-Vérification des services déployés :
-docker stack services pharma_stack
+- Verify deployed services:  
+  `docker stack services pharma_stack`
 
-Ce système assure la haute disponibilité et l’équilibrage de charge entre les services déployés.
+This system ensures high availability and load balancing among deployed services.
 
-Conclusion
-Grâce à Docker et Docker Swarm, l’application Pharma est désormais conteneurisée, facilement déployable et prête pour un environnement de production. Cette architecture permet une gestion centralisée et efficace des services, ainsi qu'une meilleure résilience face aux pannes et une montée en charge simplifiée.
+### Conclusion  
+Thanks to Docker and Docker Swarm, the Pharma application is now containerized, easily deployable, and production-ready. This architecture allows centralized and efficient service management, better fault tolerance, and simplified scaling.
 
-## Monitoring avec Prometheus et Grafana
-Le système de monitoring a été mis en place avec succès en utilisant Prometheus comme collecteur de métriques et Grafana pour la visualisation.
+## Monitoring with Prometheus and Grafana  
+The monitoring system was successfully implemented using Prometheus as a metrics collector and Grafana for visualization.
 
+### Configuration  
+Prometheus is configured to scrape metrics exposed by the Spring Boot application via its endpoint.  
+Grafana is connected to Prometheus as a data source.  
+The `up` metric confirms that the pharma-app instance is being monitored.
 
-     Configuration
-Prometheus est configuré pour scrapper les métriques exposées par l’application Spring Boot via l’endpoint
-Grafana est connecté à Prometheus en tant que source de données.
-La métrique up confirme que l’instance pharma-app est bien surveillée.
+Example visible metric: ![t](https://github.com/user-attachments/assets/24ca9643-d061-480f-8433-cb5777db8770)
 
-Exemple de métrique visible: ![t](https://github.com/user-attachments/assets/24ca9643-d061-480f-8433-cb5777db8770)
+### Performance Visualization  
+Custom dashboards have been created in Grafana to track key metrics:
 
-Visualisation des performances
-Des tableaux de bord personnalisés ont été créés dans Grafana pour suivre les métriques clés :
+- Average HTTP request latency  
+- Request rates by status code (2xx, 4xx, 5xx)  
+- Total request count over a given period
 
-Latence moyenne des requêtes HTTP
+### Use of the rate() function  
+Counters like `http_server_requests_seconds_count` are monotonically increasing. To extract meaningful data, the `rate()` function is used to get the variation over intervals.
 
-Taux de requêtes par code de statut (2xx, 4xx, 5xx)
+## Applied Best Practices
 
-Nombre total de requêtes sur une période donnée
+- **Layered Architecture**  
+  - Clear separation between `controllers`, `services`, `repositories`, and `models`.  
+  - Facilitates maintenance, testing, and code comprehension.
 
-Utilisation de la fonction rate()
-Les compteurs comme http_server_requests_seconds_count sont monotones (toujours croissants). Pour extraire des données exploitables, on utilise rate() afin d’obtenir la variation du compteur dans un intervalle :
+- **Dependency Injection with Spring (@Autowired)**  
+  - Promotes component decoupling.  
+  - Simplifies unit testing.
 
-## Bonnes pratiques appliquées
+- **Data Validation**  
+  - Use of annotations like `@Valid`, `@NotEmpty`, `@Email` to ensure data quality.
 
+- **Secure Password Management**  
+  - Password encoding via `PasswordEncoder`.
 
-- **Architecture en couches (Layered Architecture)**
-    - Séparation claire entre `controllers`, `services`, `repositories` et `models`.
-    - Facilite la maintenance, les tests, et la compréhension du code.
-
-- **Injection de dépendances avec Spring (@Autowired)**
-    - Favorise le découplage des composants.
-    - Simplifie les tests unitaires.
-
-- **Validation des données**
-    - Utilisation des annotations `@Valid`, `@NotEmpty`, `@Email` pour garantir la qualité des données reçues.
-
-- **Gestion sécurisée des mots de passe**
-    - Encodage des mots de passe via `PasswordEncoder`.
-
-- **Utilisation de Lombok**
-    - Réduction du code répétitif (getters/setters, constructeurs).
-  - Séparation claire entre `controllers`, `services`, `repositories` et `models`.
-  - Facilite la maintenance, les tests, et la compréhension du code.
-
-- **Injection de dépendances avec Spring (@Autowired)**
-  - Favorise le découplage des composants.
-  - Simplifie les tests unitaires.
-
-- **Validation des données**
-  - Utilisation des annotations `@Valid`, `@NotEmpty`, `@Email` pour garantir la qualité des données reçues.
-
-- **Gestion sécurisée des mots de passe**
-  - Encodage des mots de passe via `PasswordEncoder`.
-
-- **Utilisation de Lombok**
-  - Réduction du code répétitif (getters/setters, constructeurs).
+- **Use of Lombok**  
+  - Reduces boilerplate code (getters/setters, constructors).
 
 ---
 
-## Design patterns utilisés
+## Design Patterns Used
 
-- **Singleton (via @Service)**
-    - Les services Spring sont instanciés une seule fois par le conteneur Spring, ce qui garantit une instance unique.
+- **Singleton (via @Service)**  
+  - Spring services are instantiated once by the Spring container, ensuring a single instance.
 
-- **Repository pattern**
-    - Les interfaces `UserRepository` étendent `JpaRepository` pour gérer l’accès aux données de manière abstraite.
+- **Repository Pattern**  
+  - Interfaces like `UserRepository` extend `JpaRepository` for abstract data access.
 
-- **Dependency Injection**
-    - Les dépendances sont injectées automatiquement par Spring, ce qui permet un couplage faible et facilite les tests.
-  - Les services Spring sont instanciés une seule fois par le conteneur Spring, ce qui garantit une instance unique.
-
-- **Repository pattern**
-  - Les interfaces `UserRepository` étendent `JpaRepository` pour gérer l’accès aux données de manière abstraite.
-
-- **Dependency Injection**
-  - Les dépendances sont injectées automatiquement par Spring, ce qui permet un couplage faible et facilite les tests.
+- **Dependency Injection**  
+  - Dependencies are automatically injected by Spring, allowing loose coupling and easier testing.
 
 ---
-## Tests unitaires
 
-Ce projet inclut des tests unitaires pour garantir la fiabilité et la qualité du code métier.
+## Unit Tests
 
-Les classes testées incluent notamment :
-- `ClientServiceImpl`
-- `FournisseurServiceImpl`
-- `VenteServiceImpl`
+This project includes unit tests to ensure reliability and quality of business logic.
 
-Ces tests couvrent les principales fonctionnalités de chaque service, comme :
-- La gestion des clients
-- La gestion des fournisseurs
-- Le traitement des ventes
-Les classes testées incluent notamment :  
+Tested classes notably include:  
 - `ClientServiceImpl`  
 - `FournisseurServiceImpl`  
 - `VenteServiceImpl`  
 
-Ces tests couvrent les principales fonctionnalités de chaque service, comme :  
-- La gestion des clients  
-- La gestion des fournisseurs  
-- Le traitement des ventes  
+These tests cover main features of each service, such as:  
+- Client management  
+- Supplier management  
+- Sales processing  
 
-Ils sont écrits avec JUnit 5 et Mockito pour simuler les dépendances.
+Tests are written using JUnit 5 and Mockito to mock dependencies.
 
 ---
 
-Pour lancer les tests, utilise la commande Maven suivante :
+To run tests, use the following Maven command:
 
-Pour lancer les tests, utilise la commande Maven suivante :  
-
+```bash
 mvn test
 
+
 ---
-## Structure du projet
+## Project Structure
 
 src/
 
@@ -241,9 +206,8 @@ src/
 
 (https://github.com/user-attachments/assets/356a1883-6f8e-472f-9862-0dcd9ec7cce3)
 
-## Configuration de la base de données
-
-Configurer les informations de connexion à la base de données dans le fichier `application.properties` :
+## Database Configuration
+Configure database connection information in the application.properties file:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/pharma_db
@@ -254,15 +218,15 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 server.port=8080
-Lancement de l'application
-Cloner le dépôt :
+Running the Application
+Clone the repository:
 git clone https://github.com/ton-utilisateur/pharma.git
 cd pharma
 
 
-Lancer l'application avec Maven :
+Run the application with Maven:
 mvn spring-boot:run
-Accéder à l'application :
+Access the application:
 
 http://localhost:8080/register
 
@@ -273,5 +237,5 @@ http://localhost:8080/register
 
 
 ## Demonstration
-lien: https://youtu.be/J4Sg0SQTUhc
+link: https://youtu.be/J4Sg0SQTUhc
 
