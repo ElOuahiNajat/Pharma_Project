@@ -168,7 +168,6 @@ Tests are written using JUnit 5 and Mockito to mock dependencies.
 
 To run tests, use the following Maven command:
 
-```bash
 mvn test
 
 
